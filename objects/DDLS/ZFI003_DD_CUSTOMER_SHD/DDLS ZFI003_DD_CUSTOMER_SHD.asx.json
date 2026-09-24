@@ -9,10 +9,10 @@
     "AS4USER":"SAP_CUSTOMER",
     "AS4DATE":"0000-00-00",
     "AS4TIME":"00:00:00",
-    "SOURCE":"//@AccessControl.authorizationCheck: #NOT_REQUIRED\r\n//@EndUserText.label: 'Customer Search Help Data Definition'\r\n//define root view entity ZFI003_DD_CUSTOMER_SHD\r\n//  as select from I_Customer\r\n//{\r\n//  key Customer,\r\n//      BPCustomerFullName\r\n//\r\n//}\r\n\r\n\r\n@AccessControl.authorizationCheck: #NOT_REQUIRED\r\n  @EndUserText.label: 'Customer Search Help Data Definition'\r\n  define root view entity ZFI003_DD_CUSTOMER_SHD\r\n    as select from I_Customer as customer\r\n    inner join   I_CustomerCompany as company\r\n      on customer.Customer = company.Customer\r\n  {\r\n    key customer.Customer,\r\n        customer.BPCustomerFullName,\r\n        company.CompanyCode\r\n  }\r\n \r\n\r\n/*+[internal] {\n\"BASEINFO\":\n{\n\"FROM\":\n[\n\"I_CUSTOMER\",\n\"I_CUSTOMERCOMPANY\"\n],\n\"ASSOCIATED\":\n[],\n\"BASE\":\n[],\n\"ANNO_REF\":\n[],\n\"SCALAR_FUNCTION\":\n[],\n\"VERSION\":0,\n\"ANNOREF_EVALUATION_ERROR\":\"\"\n}\n}*/",
+    "SOURCE":"//@AccessControl.authorizationCheck: #NOT_REQUIRED\r\n//@EndUserText.label: 'Customer Search Help Data Definition'\r\n//define root view entity ZFI003_DD_CUSTOMER_SHD\r\n//  as select from I_Customer\r\n//{\r\n//  key Customer,\r\n//      BPCustomerFullName\r\n//\r\n//}\r\n\r\n\r\n@AccessControl.authorizationCheck: #NOT_REQUIRED\r\n@EndUserText.label: 'Customer Search Help Data Definition'\r\ndefine root view entity ZFI003_DD_CUSTOMER_SHD\r\n  as select from I_Customer as customer\r\n  inner join   I_CustomerCompany as company\r\n    on customer.Customer = company.Customer\r\n{\r\n  key customer.Customer,\r\n  key company.CompanyCode,\r\n      customer.BPCustomerFullName\r\n}\r\n \r\n\r\n/*+[internal] {\n\"BASEINFO\":\n{\n\"FROM\":\n[\n\"I_CUSTOMER\",\n\"I_CUSTOMERCOMPANY\"\n],\n\"ASSOCIATED\":\n[],\n\"BASE\":\n[],\n\"ANNO_REF\":\n[],\n\"SCALAR_FUNCTION\":\n[],\n\"VERSION\":0,\n\"ANNOREF_EVALUATION_ERROR\":\"\"\n}\n}*/",
     "PARENTNAME":"",
     "ACTFLAG":"",
-    "CHGFLAG":"42",
+    "CHGFLAG":"5T",
     "SOURCE_TYPE":"W",
     "SOURCE_ORIGIN":"0",
     "ABAP_LANGUAGE_VERSION":"5"
