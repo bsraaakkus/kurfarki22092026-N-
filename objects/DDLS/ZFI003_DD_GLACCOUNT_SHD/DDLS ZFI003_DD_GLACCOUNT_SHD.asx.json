@@ -9,10 +9,10 @@
     "AS4USER":"SAP_CUSTOMER",
     "AS4DATE":"0000-00-00",
     "AS4TIME":"00:00:00",
-    "SOURCE":"@AccessControl.authorizationCheck: #NOT_REQUIRED\r\n@EndUserText.label: 'GL Account Search Help Data Definition'\r\ndefine root view entity ZFI003_DD_GLACCOUNT_SHD\r\n  as select from I_GLAccountText\r\n{\r\n  key GLAccount,\r\n      GLAccountLongName\r\n}\r\nwhere\r\n      ChartOfAccounts = 'YCOA'\r\n  and Language        = $session.system_language\r\n/*+[internal] {\n\"BASEINFO\":\n{\n\"FROM\":\n[\n\"I_GLACCOUNTTEXT\"\n],\n\"ASSOCIATED\":\n[],\n\"BASE\":\n[],\n\"ANNO_REF\":\n[],\n\"SCALAR_FUNCTION\":\n[],\n\"VERSION\":0,\n\"ANNOREF_EVALUATION_ERROR\":\"\"\n}\n}*/",
+    "SOURCE":"//@AccessControl.authorizationCheck: #NOT_REQUIRED\r\n//@EndUserText.label: 'GL Account Search Help Data Definition'\r\n//define root view entity ZFI003_DD_GLACCOUNT_SHD\r\n//  as select from I_GLAccountText\r\n//{\r\n//  key GLAccount,\r\n//      GLAccountLongName\r\n//}\r\n//where\r\n//      ChartOfAccounts = 'YCOA'\r\n//  and Language        = $session.system_language\r\n\r\n\r\n@AccessControl.authorizationCheck: #NOT_REQUIRED\r\n@EndUserText.label: 'GL Account Search Help Data Definition'\r\ndefine root view entity ZFI003_DD_GLACCOUNT_SHD\r\n  as select from I_GLAccountText as glt\r\n  inner join   I_GLAccountInCompanyCode as coa\r\n    on coa.GLAccount = glt.GLAccount\r\n  inner join   I_CompanyCode as cc\r\n    on  cc.CompanyCode     = coa.CompanyCode\r\n    and cc.ChartOfAccounts = glt.ChartOfAccounts\r\n{\r\n  key glt.GLAccount,\r\n      glt.GLAccountLongName,\r\n      coa.CompanyCode\r\n}\r\nwhere\r\n      glt.ChartOfAccounts = 'YCOA'\r\n  and glt.Language        = $session.system_language\r\n/*+[internal] {\n\"BASEINFO\":\n{\n\"FROM\":\n[\n\"I_COMPANYCODE\",\n\"I_GLACCOUNTINCOMPANYCODE\",\n\"I_GLACCOUNTTEXT\"\n],\n\"ASSOCIATED\":\n[],\n\"BASE\":\n[],\n\"ANNO_REF\":\n[],\n\"SCALAR_FUNCTION\":\n[],\n\"VERSION\":0,\n\"ANNOREF_EVALUATION_ERROR\":\"\"\n}\n}*/",
     "PARENTNAME":"",
     "ACTFLAG":"",
-    "CHGFLAG":"T351",
+    "CHGFLAG":"42",
     "SOURCE_TYPE":"W",
     "SOURCE_ORIGIN":"0",
     "ABAP_LANGUAGE_VERSION":"5"
